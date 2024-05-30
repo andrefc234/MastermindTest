@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom class for responsive text resizing */
+@media (max-width: 640px) {
+  .responsive-text {
+    font-size: 0.875rem; /* Small text for small screens */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .responsive-text {
+    font-size: 1rem; /* Medium text for medium screens */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .responsive-text {
+    font-size: 1.125rem; /* Large text for large screens */
+  }
+}
+
+@media (min-width: 1025px) {
+  .responsive-text {
+    font-size: 1.25rem; /* Extra-large text for extra-large screens */
+  }
+}
+
