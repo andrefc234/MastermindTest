@@ -1,5 +1,5 @@
 import { SetStateAction, useState } from "react";
-
+import PlanSelection from "../Tools/Selection";
 
 interface Plan {
   title: string;
@@ -10,62 +10,14 @@ interface Plan {
 const Plans: React.FC = () => {
 
     
-
-    function PlanSelection() {
-        const [selectedPlan, setSelectedPlan] = useState(null);
-      
-        const handlePlanSelect = (plan: any | SetStateAction<null>) => {
-          setSelectedPlan(plan);
-        };
-      
-        return (
-          <div className="flex justify-center items-center  py-5 my-4">
-            <div className="rounded-full bg-white shadow-md p-2 flex items-center justify-between space-x-2">
-              <button
-                className={`rounded-full py-3 px-3 text-base font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 ${
-                  selectedPlan === 'View all' ? 'bg-blue-600' : ''
-                }`}
-                onClick={() => handlePlanSelect('View all')}
-              >
-                View all
-              </button>
-              <button
-                className={`px-3 py-4 text-base font-medium text-gray-700 hover:text-gray-900 ${
-                  selectedPlan === 'Starter' ? 'font-bold' : ''
-                }`}
-                onClick={() => handlePlanSelect('Starter')}
-              >
-                Starter
-              </button>
-              <button
-                className={`px-3 py-4 text-base font-medium text-gray-700 hover:text-gray-900 ${
-                  selectedPlan === 'Essential' ? 'font-bold' : ''
-                }`}
-                onClick={() => handlePlanSelect('Essential')}
-              >
-                Essential
-              </button>
-              <button
-                className={`px-3 py-4 text-base font-medium text-gray-700 hover:text-gray-900 ${
-                  selectedPlan === 'Premium' ? 'font-bold' : ''
-                }`}
-                onClick={() => handlePlanSelect('Premium')}
-              >
-                Premium
-              </button>
-              <button
-                className={`px-3 py-4 text-base font-medium text-gray-700 hover:text-gray-900 ${
-                  selectedPlan === 'VIP League' ? 'font-bold' : ''
-                }`}
-                onClick={() => handlePlanSelect('VIP League')}
-              >
-                VIP League
-              </button>
-            </div>
-          </div>
-        );
-      }
-  const plans: Plan[] = [
+    const plansBtn = [
+        { id: "1", name: 'View all' },
+        { id: "2", name: 'Starter' },
+        { id: "3", name: 'Essential' },
+        { id: "4", name: 'Premium' },
+        { id: "5", name: 'VIP League' }
+      ];
+    const plans: Plan[] = [
     {
       title: 'Essential',
       description: 'For students at the very top of the Typical Applicant Pool',
@@ -88,7 +40,11 @@ const Plans: React.FC = () => {
     },
   ];
  
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
 
+  const handlePlanChange = (id: string | null) => {
+    setSelectedPlanId(id);
+  };
   
   return (
     <>
@@ -96,7 +52,7 @@ const Plans: React.FC = () => {
     <div className="container mx-auto px-4 py-6 ">
     <div className="my-10">
 
-    <PlanSelection/>
+    <PlanSelection plans={plansBtn} onPlanChange={handlePlanChange}/>
     </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {plans.map((plan, index) => (
